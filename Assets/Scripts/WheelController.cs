@@ -13,20 +13,15 @@ public class Taxi : MonoBehaviour
     public float brakingForce = 20000f;
     public float maxTurnAngle = 15f;
 
+
     public float speed;
 
     private float currentAcceleration = 0f;
     private float currentBrakeForce = 0f;
     private float currentTurnAngle = 0f;
 
-    private AudioSource carIdle;
-    private AudioSource carRev;
 
-    private void Start()
-    {
-        carIdle = GetComponent<AudioSource>();
-        carRev = GetComponent<AudioSource>();
-    }
+
     private void FixedUpdate()
     {
         currentAcceleration = acceleration * Input.GetAxis("Vertical");
@@ -65,14 +60,7 @@ public class Taxi : MonoBehaviour
         UpdateWheel(RR, RRT);
         UpdateWheel(RL, RLT);
 
-        if (Input.GetAxis("Vertical") != 0f && !carRev.isPlaying)
-        {
-            carRev.Play();
-        }
-        else if (Input.GetAxis("Vertical") == 0f)
-        {
-            carRev.Stop();
-        }
+
     }
 
     void UpdateWheel(WheelCollider col, Transform trans)
