@@ -4,78 +4,90 @@ using System.Collections.Generic;
 
 public class CarController : MonoBehaviour
 {
+    // Enumeration for control modes (Keyboard or Buttons)
     public enum ControlMode
     {
         Keyboard,
         Buttons
     };
 
+    // Enumeration for wheel axles (Front or Rear)
     public enum Axel
     {
         Front,
         Rear
     }
 
+    // Structure to define wheel properties
     [Serializable]
     public struct Wheel
     {
-        public GameObject wheelModel;
-        public WheelCollider wheelCollider;
-        public GameObject wheelEffectObj;
-        public ParticleSystem smokeParticle;
-        public Axel axel;
+        public GameObject wheelModel;          // Reference to the wheel model GameObject
+        public WheelCollider wheelCollider;    // Reference to the WheelCollider component
+        public GameObject wheelEffectObj;      // Reference to the wheel effect GameObject
+        public ParticleSystem smokeParticle;   // Reference to the smoke particle system
+        public Axel axel;                      // Axle type (Front or Rear)
     }
 
-    public ControlMode control;
+    public ControlMode control;                // Control mode for the car (Keyboard or Buttons)
 
-    public float maxAcceleration = 30.0f;
-    public float brakeAcceleration = 50.0f;
+    // Car movement parameters
+    public float maxAcceleration = 30.0f;     // Maximum acceleration value
+    public float brakeAcceleration = 50.0f;   // Brake acceleration value
 
-    public float turnSensitivity = 1.0f;
-    public float maxSteerAngle = 30.0f;
-    public float maxSpeed = 20f;
+    // Steering parameters
+    public float turnSensitivity = 1.0f;      // Steering sensitivity
+    public float maxSteerAngle = 30.0f;       // Maximum steering angle
 
-    public Vector3 _centerOfMass;
+    public float maxSpeed = 20f;              // Maximum speed for the car
 
-    public List<Wheel> wheels;
+    public Vector3 _centerOfMass;             // Center of mass for the car
 
-    float moveInput;
-    float steerInput;
+    public List<Wheel> wheels;                // List of wheels attached to the car
 
-    private Rigidbody carRb;
+    private float moveInput;                  // Input for movement (forward/backward)
+    private float steerInput;                 // Input for steering (left/right)
 
+    private Rigidbody carRb;                  // Reference to the Rigidbody component of the car
 
     void Start()
     {
+        // Initialize the Rigidbody component and set the center of mass
         carRb = GetComponent<Rigidbody>();
         carRb.centerOfMass = _centerOfMass;
-
     }
 
     void Update()
     {
+        // Get inputs for movement and steering
         GetInputs();
+
+        // Animate wheels and update wheel effects
         AnimateWheels();
         WheelEffects();
     }
 
     void LateUpdate()
     {
+        // Apply movement, steering, and braking
         Move();
         Steer();
         Brake();
     }
 
+    // Method to set movement input
     public void MoveInput(float input)
     {
         moveInput = input;
     }
 
+    // Method to set steering input
     public void SteerInput(float input)
     {
         steerInput = input;
     }
 
+    // Method to get inputs based on the control mode
     void GetInputs()
     {
         if (control == ControlMode.Keyboard)
@@ -85,7 +97,7 @@ public class CarController : MonoBehaviour
         }
     }
 
-
+    // Method to handle car movement
     void Move()
     {
         // Calculate the current speed of the car
@@ -113,63 +125,75 @@ public class CarController : MonoBehaviour
         }
     }
 
+    // Method to handle steering
     void Steer()
     {
         foreach (var wheel in wheels)
         {
             if (wheel.axel == Axel.Front)
             {
+                // Calculate the steer angle based on the input and sensitivity
                 var _steerAngle = steerInput * turnSensitivity * maxSteerAngle;
+
+                // Apply the steer angle to the front wheels with smoothing
                 wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, 0.6f);
             }
         }
     }
 
+    // Method to handle braking
     void Brake()
     {
         if (Input.GetKey(KeyCode.Space) || moveInput == 0)
         {
+            // Apply brake torque when the space key is pressed or no movement input is detected
             foreach (var wheel in wheels)
             {
                 wheel.wheelCollider.brakeTorque = 300 * brakeAcceleration * Time.deltaTime;
             }
-
         }
         else
         {
+            // Release the brake torque when movement input is detected
             foreach (var wheel in wheels)
             {
                 wheel.wheelCollider.brakeTorque = 0;
             }
-
         }
     }
 
+    // Method to animate wheels based on the WheelCollider's pose
     void AnimateWheels()
     {
         foreach (var wheel in wheels)
         {
             Quaternion rot;
             Vector3 pos;
+
+            // Get the world pose of the WheelCollider
             wheel.wheelCollider.GetWorldPose(out pos, out rot);
+
+            // Update the position and rotation of the wheel model
             wheel.wheelModel.transform.position = pos;
             wheel.wheelModel.transform.rotation = rot;
         }
     }
 
+    // Method to update wheel effects (e.g., trail renderer and smoke particles)
     void WheelEffects()
     {
         foreach (var wheel in wheels)
         {
-            //var dirtParticleMainSettings = wheel.smokeParticle.main;
-
+            // Check if the space key is pressed and the wheel is grounded with sufficient velocity
             if (Input.GetKey(KeyCode.Space) && wheel.axel == Axel.Rear && wheel.wheelCollider.isGrounded == true && carRb.velocity.magnitude >= 10.0f)
             {
+                // Enable the trail renderer and emit smoke particles
                 wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = true;
                 wheel.smokeParticle.Emit(1);
             }
             else
             {
+                // Disable the trail renderer
                 wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = false;
             }
         }
