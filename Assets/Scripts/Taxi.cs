@@ -6,12 +6,12 @@ public class Taxi : MonoBehaviour
 {
     [SerializeField] WheelCollider FR, FL, RR, RL; //wheels (Front Right, Left, Rear Right, Left)
     [SerializeField] Transform FRT, FLT, RRT, RLT; //T = Transform
-    [SerializeField] private float maxSpeed = 10f;
+    [SerializeField] private float maxSpeed = 15f;
 
 
     public float acceleration = 20000f;
     public float brakingForce = 50000f;
-    public float maxTurnAngle = 15f;
+    public float maxTurnAngle = 45f;
     public float brakingFactor = 3000f;
 
 
@@ -36,7 +36,7 @@ public class Taxi : MonoBehaviour
             float brakeForce = speed * brakingFactor;
 
             // Apply the braking force to slow down the car
-            if (speed > 0.1f)
+            if (speed > 2f)
             {
                 GetComponent<Rigidbody>().AddForce(-GetComponent<Rigidbody>().velocity.normalized * brakeForce);
             }
