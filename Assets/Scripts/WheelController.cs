@@ -9,9 +9,10 @@ public class Taxi : MonoBehaviour
     [SerializeField] private float maxSpeed = 10f;
 
 
-    public float acceleration = 1000f;
-    public float brakingForce = 20000f;
+    public float acceleration = 20000f;
+    public float brakingForce = 50000f;
     public float maxTurnAngle = 15f;
+    public float brakingFactor = 3000f;
 
 
     public float speed;
@@ -27,6 +28,24 @@ public class Taxi : MonoBehaviour
         currentAcceleration = acceleration * Input.GetAxis("Vertical");
 
         speed = GetComponent<Rigidbody>().velocity.magnitude;
+
+        // Apply braking if the forward key is not being pressed
+        if (Input.GetAxis("Vertical") == 0f)
+        {
+            // Calculate the braking force based on the car's current speed
+            float brakeForce = speed * brakingFactor;
+
+            // Apply the braking force to slow down the car
+            if (speed > 0.1f)
+            {
+                GetComponent<Rigidbody>().AddForce(-GetComponent<Rigidbody>().velocity.normalized * brakeForce);
+            }
+            else
+            {
+                // If the car's speed is very low, stop the car
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+        }
 
         if (speed > maxSpeed)
         {
