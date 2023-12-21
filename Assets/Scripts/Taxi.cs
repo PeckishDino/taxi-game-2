@@ -39,6 +39,7 @@ public class Taxi : MonoBehaviour
             if (speed > 2f)
             {
                 GetComponent<Rigidbody>().AddForce(-GetComponent<Rigidbody>().velocity.normalized * brakeForce);
+                currentAcceleration = 0f;
             }
             else
             {
