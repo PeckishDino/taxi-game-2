@@ -2,13 +2,8 @@ using UnityEngine;
 
 public class PickUpAndDropOff : MonoBehaviour
 {
-    [SerializeField] public PickUpAndDropOff pickedUp;
+    public PickUpAndDropOff pickedUp;
 
-
-    void Start()
-    {
-        pickedUp = null;
-    }
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -41,6 +36,7 @@ public class PickUpAndDropOff : MonoBehaviour
                         Debug.Log("pickedUp is null");
                     }
                 }
+                                Debug.Log("Current pickedUp: " + pickedUp);
             }
             else
             {
