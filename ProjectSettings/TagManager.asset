@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - DropOffSphere
-  - DropOffCylinder
+  - Drop Off
+  - Pick Up
   layers:
   - Default
   - TransparentFX
