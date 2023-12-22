@@ -6,10 +6,21 @@ public class DropOff : MonoBehaviour
 {
 
     public PickUp npcPickUp;
+    PickUp[] randPickUp;
+    public DropOff[] DropOffLocations;
+
+    private void Start()
+    {
+        randPickUp = FindObjectsOfType<PickUp>();
+        DropOffLocations = FindObjectsOfType<DropOff>();
+        foreach (DropOff d in DropOffLocations)
+        {
+            gameObject.SetActive(false);
+        }
+    }
     public void OnTriggerEnter(Collider other)
     {
 
-        npcPickUp.Appear();
         Debug.Log("Trigger entered by: " + other.gameObject.name); // Debug log to trace the colliding GameObject
         // Check if the colliding GameObject is the taxi (tagged as "Player")
         if (other.CompareTag("Player"))
@@ -23,6 +34,11 @@ public class DropOff : MonoBehaviour
             {
                 Debug.Log("Passenger dropped off");
                 carController.hasPassenger = false;
+                int rand = Random.Range(0, randPickUp.Length);
+                print(randPickUp[rand]);
+                randPickUp[rand].gameObject.SetActive(true);
+                gameObject.SetActive(false);
+                
             }
             else
             {

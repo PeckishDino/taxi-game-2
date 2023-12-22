@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    DropOff dropOff;
+    DropOff[] dropOff;
+    PickUp[] pickUp;
     void Start()
     {
         // Find the DropOff script in the scene
-        dropOff = FindObjectOfType<DropOff>();
+        dropOff = FindObjectsOfType<DropOff>();
+        pickUp = FindObjectsOfType<PickUp>();
+        foreach(PickUp p in pickUp)
+        {
+            gameObject.SetActive(false);
+        }
+        foreach (DropOff d in dropOff)
+        {
+            gameObject.SetActive(false);
+        }
+        int rand1 = Random.Range(0, pickUp.Length);
+        print(rand1 + "this");
+        pickUp[rand1].gameObject.SetActive(true);
 
         if (dropOff == null)
         {
@@ -22,10 +35,15 @@ public class PickUp : MonoBehaviour
         // Check if the colliding GameObject is the taxi (tagged as "Player")
         if (other.CompareTag("Player"))
         {
+            Debug.Log(dropOff[0] + " " + dropOff[1]);
             // Perform pickup action (e.g., deactivate NPC GameObject)
             gameObject.SetActive(false);
 
-            dropOff.npcPickUp = this;
+            int rand = Random.Range(0, (dropOff.Length));
+            print(rand);
+            print(dropOff[rand]);
+            dropOff[rand].npcPickUp = this;
+            dropOff[rand].gameObject.SetActive(true);
 
             CarController carController = other.GetComponent<CarController>();
             if (carController != null)
@@ -41,8 +59,8 @@ public class PickUp : MonoBehaviour
         }
     }
 
-    public void Appear()
+   /* public void Appear()
     {
         gameObject.SetActive(true);
-    }
+    }*/
 }
