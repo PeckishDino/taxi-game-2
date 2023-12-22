@@ -45,10 +45,13 @@ public class CarController : MonoBehaviour
 
     public List<Wheel> wheels;                // List of wheels attached to the car
 
+    public bool hasPassenger = false;
+
     private float moveInput;                  // Input for movement (forward/backward)
     private float steerInput;                 // Input for steering (left/right)
 
     private Rigidbody carRb;                  // Reference to the Rigidbody component of the car
+
 
     void Start()
     {
@@ -64,7 +67,7 @@ public class CarController : MonoBehaviour
 
         // Animate wheels and update wheel effects
         AnimateWheels();
-        WheelEffects();
+        //WheelEffects();
     }
 
     void LateUpdate()
@@ -180,7 +183,7 @@ public class CarController : MonoBehaviour
     }
 
     // Method to update wheel effects (e.g., trail renderer and smoke particles)
-    void WheelEffects()
+    /*void WheelEffects()
     {
         foreach (var wheel in wheels)
         {
@@ -197,5 +200,5 @@ public class CarController : MonoBehaviour
                 wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = false;
             }
         }
-    }
+    }*/
 }
