@@ -21,7 +21,6 @@ public class DropOff : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
 
-        Debug.Log("Trigger entered by: " + other.gameObject.name); // Debug log to trace the colliding GameObject
         if (other.CompareTag("Player"))
         {
                 CarController carController = other.GetComponent<CarController>();
