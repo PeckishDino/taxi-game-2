@@ -4,23 +4,56 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
+    // Static flag to ensure Awake() logic runs only once
+
     DropOff[] dropOff;
-    PickUp[] pickUp;
-    void Start()
+    public PickUp[] pickUp;
+
+    void Awake()
     {
+        // Check if the initialization has already occurred
+
+        // Mark the script as initialized
+
         // Find the DropOff script in the scene
         dropOff = FindObjectsOfType<DropOff>();
         pickUp = FindObjectsOfType<PickUp>();
-        foreach(PickUp p in pickUp)
+
+        // Debug logs for troubleshooting
+        Debug.Log("Number of Pick Up Locations: " + pickUp.Length);
+        /*foreach (PickUp p in pickUp)
         {
-            gameObject.SetActive(false);
+            Debug.Log("Found PickUp: " + p.gameObject.name);
+            p.gameObject.SetActive(false);
+        }
+
+        Debug.Log("Number of Drop Off Locations: " + dropOff.Length);
+        foreach (DropOff d in dropOff)
+        {
+            Debug.Log("Found DropOff: " + d.gameObject.name);
+        }
+
+        // Randomly activate one PickUp GameObject
+        int rand1 = Random.Range(0, pickUp.Length);
+        pickUp[rand1].gameObject.SetActive(true);
+
+        if (dropOff == null)
+        {
+            Debug.LogError("DropOff script not found in the scene!"); // Log an error if DropOff script is not found
+        }*/
+    }
+    private void Start()
+    {
+        foreach (PickUp p in pickUp)
+        {
+            Debug.Log("Found PickUp: " + p.gameObject.name);
+            p.gameObject.SetActive(false);
         }
         foreach (DropOff d in dropOff)
         {
-            gameObject.SetActive(false);
+            Debug.Log("Found DropOff: " + d.gameObject.name);
         }
         int rand1 = Random.Range(0, pickUp.Length);
-        print(rand1 + "this");
         pickUp[rand1].gameObject.SetActive(true);
 
         if (dropOff == null)
@@ -29,18 +62,23 @@ public class PickUp : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+public void OnTriggerEnter(Collider other)
     {
         Debug.Log("Trigger entered by: " + other.gameObject.name); // Debug log to trace the colliding GameObject
-        // Check if the colliding GameObject is the taxi (tagged as "Player")
+
         if (other.CompareTag("Player"))
+            dropOff = FindObjectsOfType<DropOff>();
+        print(dropOff);
         {
-            Debug.Log(dropOff[0] + " " + dropOff[1]);
-            // Perform pickup action (e.g., deactivate NPC GameObject)
+          //  Debug.Log(dropOff[0] + " " + dropOff[1]);
+
+            // Deactivate the current PickUp GameObject
             gameObject.SetActive(false);
 
-            int rand = Random.Range(0, (dropOff.Length));
+            // Randomly select and activate one DropOff GameObject
+            int rand = Random.Range(0, dropOff.Length);
             print(rand);
+            print("Number of Drop Off Locations: " + dropOff.Length);
             print(dropOff[rand]);
             dropOff[rand].npcPickUp = this;
             dropOff[rand].gameObject.SetActive(true);
@@ -55,11 +93,10 @@ public class PickUp : MonoBehaviour
             {
                 Debug.Log("NewTaxi component not found!"); // Debug log if NewTaxi component is not found
             }
-
         }
     }
 
-   /* public void Appear()
+    /* public void Appear()
     {
         gameObject.SetActive(true);
     }*/

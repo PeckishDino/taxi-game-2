@@ -7842,7 +7842,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -12098,6 +12098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f378546a35a8f4db1c87a7368ca571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUp: []
 --- !u!1001 &1454219765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14476,7 +14477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1685931344
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16853,6 +16854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f378546a35a8f4db1c87a7368ca571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUp: []
 --- !u!1 &2028390872 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: e3c71c50de390ec4190b877211ba0717,

@@ -34,9 +34,10 @@ public class DropOff : MonoBehaviour
             {
                 Debug.Log("Passenger dropped off");
                 carController.hasPassenger = false;
-                int rand = Random.Range(0, randPickUp.Length);
-                print(randPickUp[rand]);
-                randPickUp[rand].gameObject.SetActive(true);
+                int rand = Random.Range(0, npcPickUp.pickUp.Length);
+                print(npcPickUp.pickUp[rand]);
+                print(npcPickUp.pickUp[rand]);
+                npcPickUp.pickUp[rand].gameObject.SetActive(true);
                 gameObject.SetActive(false);
                 
             }
