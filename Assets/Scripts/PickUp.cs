@@ -21,26 +21,6 @@ public class PickUp : MonoBehaviour
 
         // Debug logs for troubleshooting
         Debug.Log("Number of Pick Up Locations: " + pickUp.Length);
-        /*foreach (PickUp p in pickUp)
-        {
-            Debug.Log("Found PickUp: " + p.gameObject.name);
-            p.gameObject.SetActive(false);
-        }
-
-        Debug.Log("Number of Drop Off Locations: " + dropOff.Length);
-        foreach (DropOff d in dropOff)
-        {
-            Debug.Log("Found DropOff: " + d.gameObject.name);
-        }
-
-        // Randomly activate one PickUp GameObject
-        int rand1 = Random.Range(0, pickUp.Length);
-        pickUp[rand1].gameObject.SetActive(true);
-
-        if (dropOff == null)
-        {
-            Debug.LogError("DropOff script not found in the scene!"); // Log an error if DropOff script is not found
-        }*/
     }
     private void Start()
     {
