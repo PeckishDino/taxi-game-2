@@ -6,13 +6,14 @@ public class PickUp : MonoBehaviour
 {
     DropOff[] dropOff;
     public PickUp[] pickUp;
+    private bool isEPressed = false; // Flag to check if "E" is pressed
 
     void Awake()
     {
         dropOff = FindObjectsOfType<DropOff>();
         pickUp = FindObjectsOfType<PickUp>();
-
     }
+
     private void Start()
     {
         foreach (PickUp p in pickUp)
@@ -23,17 +24,29 @@ public class PickUp : MonoBehaviour
         pickUp[rand1].gameObject.SetActive(true);
     }
 
-public void OnTriggerEnter(Collider other)
+    void Update()
     {
-        if (other.CompareTag("Player"))
-            {
-                gameObject.SetActive(false);
-                int rand = Random.Range(0, dropOff.Length);
-                dropOff[rand].npcPickUp = this;
-                dropOff[rand].gameObject.SetActive(true);
-
-                CarController carController = other.GetComponent<CarController>();
-                   carController.hasPassenger = true;
-            }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            isEPressed = true;
         }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (isEPressed && other.CompareTag("Player"))
+        {
+            gameObject.SetActive(false);
+            int rand = Random.Range(0, dropOff.Length);
+            dropOff[rand].gameObject.SetActive(true);
+
+            CarController carController = other.GetComponent<CarController>();
+            if (carController != null)
+            {
+                carController.hasPassenger = true;
+            }
+
+            isEPressed = false; // Reset the flag after executing the logic
+        }
+    }
 }

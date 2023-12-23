@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class DropOff : MonoBehaviour
 {
+    PickUp[] pickUp;
+    DropOff[] DropOffLocations;
 
-    public PickUp npcPickUp;
-    PickUp[] randPickUp;
-    public DropOff[] DropOffLocations;
 
+    private void Awake()
+    {
+        pickUp = FindObjectsOfType<PickUp>();
+        DropOffLocations = FindObjectsOfType<DropOff>();
+    }
     private void Start()
     {
-        randPickUp = FindObjectsOfType<PickUp>();
-        DropOffLocations = FindObjectsOfType<DropOff>();
         foreach (DropOff d in DropOffLocations)
         {
             gameObject.SetActive(false);
@@ -23,11 +25,15 @@ public class DropOff : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-                CarController carController = other.GetComponent<CarController>();
+            CarController carController = other.GetComponent<CarController>();
+            {
                 carController.hasPassenger = false;
-                int rand = Random.Range(0, npcPickUp.pickUp.Length);
-                npcPickUp.pickUp[rand].gameObject.SetActive(true);
+                int rand = Random.Range(0, pickUp.Length);
+                pickUp[rand].gameObject.SetActive(true);
                 gameObject.SetActive(false);
+                
+            }
+
         }
     }
 }

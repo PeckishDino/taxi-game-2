@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraRotateScript : MonoBehaviour
 {
+    public PauseMenu paused;
     private float x;
     private float y;
     public float sensitivity = -1f;
@@ -19,9 +20,16 @@ public class CameraRotateScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        y = Input.GetAxis("Mouse X");
-        x = Input.GetAxis("Mouse Y");
+        if (!paused.paused)
+        {
+            y = Input.GetAxis("Mouse X");
+        }
+        else
+        {
+            y = 0;
+         }
         rotate = new Vector3(x, y * sensitivity, 0);
         transform.eulerAngles = transform.eulerAngles - rotate;
     }
+
 }
