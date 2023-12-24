@@ -5,6 +5,7 @@ using static UnityEngine.Rendering.DebugUI.Table;
 
 public class DropOff : MonoBehaviour
 {
+    public ScoreManager scoreManager;
     PickUp[] pickUp;
     DropOff[] DropOffLocations;
     public Arrow arrow;
@@ -26,6 +27,7 @@ public class DropOff : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+            scoreManager.UpdateScore(scoreManager.points);
             CarController carController = other.GetComponent<CarController>();
             {
                 carController.hasPassenger = false;

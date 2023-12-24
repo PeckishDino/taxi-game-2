@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public CarSounds volume;
     public bool paused = false;
     public GameObject pauseMenuUI;
 
@@ -15,11 +16,13 @@ public class PauseMenu : MonoBehaviour
         {
             if (paused)
             {
+                
                 Resume();
             }
 
             else
             {
+                
                 Pause();
             }
         }
@@ -28,6 +31,7 @@ public class PauseMenu : MonoBehaviour
 
     void Resume()
     {
+        volume.carAudio.Play();
         Cursor.lockState = CursorLockMode.Locked;
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
@@ -36,18 +40,22 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
+        volume.carAudio.Stop();
         Cursor.lockState = CursorLockMode.None;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         paused = true;
+        
     }
 
     public void ResumeButton()
     {
+        volume.carAudio.Play();
         Cursor.lockState = CursorLockMode.Locked;
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         paused = false;
+        
     }
 
     public void QuitGame()
