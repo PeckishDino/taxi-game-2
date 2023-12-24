@@ -6,6 +6,7 @@ using static UnityEngine.Rendering.DebugUI.Table;
 public class DropOff : MonoBehaviour
 {
     public ScoreManager scoreManager;
+    public ScoreManager timer;
     PickUp[] pickUp;
     DropOff[] DropOffLocations;
     public Arrow arrow;
@@ -30,6 +31,7 @@ public class DropOff : MonoBehaviour
             scoreManager.UpdateScore(scoreManager.points);
             CarController carController = other.GetComponent<CarController>();
             {
+                timer.ToggleTimer();
                 carController.hasPassenger = false;
                 int rand = Random.Range(0, pickUp.Length);
                 arrow.transform.position = pickUp[rand].gameObject.transform.position + arrow.positionOffset;

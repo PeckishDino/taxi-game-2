@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
+    public ScoreManager timer;
     public GameObject prompt;
     DropOff[] dropOff;
     public PickUp[] pickUp;
@@ -46,6 +47,7 @@ public class PickUp : MonoBehaviour
         }
         if (isEPressed && other.CompareTag("Player"))
         {
+            timer.ToggleTimer();
             prompt.SetActive(false);
             gameObject.SetActive(false);
             int rand = Random.Range(0, dropOff.Length);

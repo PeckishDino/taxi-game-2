@@ -2333,6 +2333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 445628796}
+  timer: {fileID: 0}
   arrow: {fileID: 635058533}
 --- !u!1001 &227874478
 PrefabInstance:
@@ -3519,6 +3520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 445628796}
+  timer: {fileID: 445628796}
   arrow: {fileID: 635058533}
 --- !u!135 &290475861
 SphereCollider:
@@ -4208,6 +4210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 445628796}
+  timer: {fileID: 445628796}
   arrow: {fileID: 635058533}
 --- !u!23 &344158252
 MeshRenderer:
@@ -5649,6 +5652,7 @@ MonoBehaviour:
   score: 0
   scoreText: {fileID: 1807503625}
   points: 10
+  elapsedTime: 0
 --- !u!4 &445628797
 Transform:
   m_ObjectHideFlags: 0
@@ -6596,6 +6600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 445628796}
+  timer: {fileID: 445628796}
   arrow: {fileID: 635058533}
 --- !u!23 &505885585
 MeshRenderer:
@@ -9497,6 +9502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 445628796}
+  timer: {fileID: 445628796}
   arrow: {fileID: 635058533}
 --- !u!23 &865355950
 MeshRenderer:
@@ -9560,6 +9566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f378546a35a8f4db1c87a7368ca571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: {fileID: 445628796}
   prompt: {fileID: 2071236056}
   pickUp: []
   arrow: {fileID: 635058533}
@@ -15244,6 +15251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f378546a35a8f4db1c87a7368ca571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: {fileID: 445628796}
   prompt: {fileID: 2071236056}
   pickUp: []
   arrow: {fileID: 635058533}
@@ -19939,6 +19947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 445628796}
+  timer: {fileID: 445628796}
   arrow: {fileID: 635058533}
 --- !u!23 &1896228350
 MeshRenderer:
@@ -20059,6 +20068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 445628796}
+  timer: {fileID: 445628796}
   arrow: {fileID: 635058533}
 --- !u!23 &1897708425
 MeshRenderer:
@@ -20914,6 +20924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 445628796}
+  timer: {fileID: 445628796}
   arrow: {fileID: 635058533}
 --- !u!23 &1966261448
 MeshRenderer:
@@ -21068,6 +21079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 445628796}
+  timer: {fileID: 445628796}
   arrow: {fileID: 635058533}
 --- !u!23 &1972652437
 MeshRenderer:
@@ -21488,6 +21500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f378546a35a8f4db1c87a7368ca571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: {fileID: 445628796}
   prompt: {fileID: 2071236056}
   pickUp: []
   arrow: {fileID: 635058533}
@@ -23744,7 +23757,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 0e18f948f2cfc2c4992901992aa5a8a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -25195,7 +25208,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8051915825342738582, guid: d59a6feb9abbc364b98364585ec4b05d, type: 3}
+  - {fileID: 2100000, guid: 4e39f4f4832040349b817fab13ccfc14, type: 2}
   - {fileID: 4835078630258379571, guid: d59a6feb9abbc364b98364585ec4b05d, type: 3}
   - {fileID: 4217796364934669478, guid: d59a6feb9abbc364b98364585ec4b05d, type: 3}
   - {fileID: -4288583467269203127, guid: d59a6feb9abbc364b98364585ec4b05d, type: 3}
