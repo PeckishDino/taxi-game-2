@@ -2333,7 +2333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 445628796}
-  timer: {fileID: 0}
+  timer: {fileID: 445628796}
   arrow: {fileID: 635058533}
 --- !u!1001 &227874478
 PrefabInstance:
@@ -2597,6 +2597,7 @@ Transform:
   - {fileID: 505885582}
   - {fileID: 1897708422}
   - {fileID: 344158249}
+  - {fileID: 543450653342316847}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &262876097
@@ -23369,12 +23370,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149420680085}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 472.81458, y: -0.0099983215, z: 448.1808}
-  m_LocalScale: {x: 86.91, y: 86.91, z: 86.91}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -35.82956, y: -1.1152604, z: -51.954437}
+  m_LocalScale: {x: 86.91, y: 86.909996, z: 86.909996}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 257953705}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &543450653459419644
 Transform:
@@ -27128,6 +27129,7 @@ MonoBehaviour:
   minSpeed: 0
   carAudio: {fileID: 0}
   minPitch: 0.2
+  pitchChangeSpeed: 5
 --- !u!82 &9097354574026436399
 AudioSource:
   m_ObjectHideFlags: 0
@@ -27312,4 +27314,3 @@ SceneRoots:
   - {fileID: 1958543863}
   - {fileID: 543450652749451246}
   - {fileID: 445628797}
-  - {fileID: 543450653342316847}
