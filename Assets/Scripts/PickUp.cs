@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
+    public GameObject prompt;
     DropOff[] dropOff;
     public PickUp[] pickUp;
     private bool isEPressed = false; // Flag to check if "E" is pressed
-
+    public Arrow arrow;
     void Awake()
     {
         dropOff = FindObjectsOfType<DropOff>();
@@ -20,8 +21,9 @@ public class PickUp : MonoBehaviour
         {
             p.gameObject.SetActive(false);
         }
-        int rand1 = Random.Range(0, pickUp.Length);
-        pickUp[rand1].gameObject.SetActive(true);
+        int rand = Random.Range(0, pickUp.Length);
+        arrow.transform.position = pickUp[rand].gameObject.transform.position + arrow.positionOffset;
+        pickUp[rand].gameObject.SetActive(true);
     }
 
     void Update()
@@ -30,14 +32,24 @@ public class PickUp : MonoBehaviour
         {
             isEPressed = true;
         }
+
+        if (Input.GetKeyUp(KeyCode.E)) 
+        { isEPressed = false; 
+        }
     }
 
     public void OnTriggerStay(Collider other)
     {
+        if (other.CompareTag("Player"))
+        {
+            prompt.SetActive(true);
+        }
         if (isEPressed && other.CompareTag("Player"))
         {
+            prompt.SetActive(false);
             gameObject.SetActive(false);
             int rand = Random.Range(0, dropOff.Length);
+            arrow.transform.position = dropOff[rand].gameObject.transform.position + arrow.positionOffset;
             dropOff[rand].gameObject.SetActive(true);
 
             CarController carController = other.GetComponent<CarController>();
@@ -47,6 +59,14 @@ public class PickUp : MonoBehaviour
             }
 
             isEPressed = false; // Reset the flag after executing the logic
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            prompt.SetActive(false);
         }
     }
 }

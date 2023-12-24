@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class DropOff : MonoBehaviour
 {
     PickUp[] pickUp;
     DropOff[] DropOffLocations;
-
+    public Arrow arrow;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class DropOff : MonoBehaviour
             {
                 carController.hasPassenger = false;
                 int rand = Random.Range(0, pickUp.Length);
+                arrow.transform.position = pickUp[rand].gameObject.transform.position + arrow.positionOffset;
                 pickUp[rand].gameObject.SetActive(true);
                 gameObject.SetActive(false);
                 

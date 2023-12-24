@@ -147,9 +147,21 @@ public class CarController : MonoBehaviour
     // Method to handle braking
     void Brake()
     {
-        if (Input.GetKey(KeyCode.Space) || moveInput == 0)
+        // Check the sign of the car's forward velocity
+        float forwardVelocity = Vector3.Dot(carRb.velocity, transform.forward);
+
+        if ((forwardVelocity > 0 && Input.GetKey(KeyCode.S)) ||  // Car is moving forward and brake key (S) is pressed
+            (forwardVelocity < 0 && Input.GetKey(KeyCode.W)))    // Car is moving backward and accelerator key (W) is pressed
         {
-            // Apply brake torque when the space key is pressed or no movement input is detected
+            // Apply high brake torque
+            foreach (var wheel in wheels)
+            {
+                wheel.wheelCollider.brakeTorque = 1000 * brakeAcceleration * Time.deltaTime;
+            }
+        }
+        else if (Input.GetKey(KeyCode.Space) || moveInput == 0)
+        {
+            // Apply normal brake torque when the space key is pressed or no movement input is detected
             foreach (var wheel in wheels)
             {
                 wheel.wheelCollider.brakeTorque = 300 * brakeAcceleration * Time.deltaTime;
