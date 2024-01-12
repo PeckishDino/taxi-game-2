@@ -4,28 +4,9 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    public ScoreManager timer;
+    public Intermediate point;
     public GameObject prompt;
-    DropOff[] dropOff;
-    public PickUp[] pickUp;
     private bool isEPressed = false; // Flag to check if "E" is pressed
-    public Arrow arrow;
-    void Awake()
-    {
-        dropOff = FindObjectsOfType<DropOff>();
-        pickUp = FindObjectsOfType<PickUp>();
-    }
-
-    private void Start()
-    {
-        foreach (PickUp p in pickUp)
-        {
-            p.gameObject.SetActive(false);
-        }
-        int rand = Random.Range(0, pickUp.Length);
-        arrow.transform.position = pickUp[rand].gameObject.transform.position + arrow.positionOffset;
-        pickUp[rand].gameObject.SetActive(true);
-    }
 
     void Update()
     {
@@ -47,12 +28,9 @@ public class PickUp : MonoBehaviour
         }
         if (isEPressed && other.CompareTag("Player"))
         {
-            timer.ToggleTimer();
             prompt.SetActive(false);
             gameObject.SetActive(false);
-            int rand = Random.Range(0, dropOff.Length);
-            arrow.transform.position = dropOff[rand].gameObject.transform.position + arrow.positionOffset;
-            dropOff[rand].gameObject.SetActive(true);
+            point.ChooseDropOff();
 
             CarController carController = other.GetComponent<CarController>();
             if (carController != null)

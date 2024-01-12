@@ -5,24 +5,9 @@ using static UnityEngine.Rendering.DebugUI.Table;
 
 public class DropOff : MonoBehaviour
 {
+    public Intermediate point;
     public ScoreManager scoreManager;
-    public ScoreManager timer;
-    PickUp[] pickUp;
-    DropOff[] DropOffLocations;
-    public Arrow arrow;
 
-    private void Awake()
-    {
-        pickUp = FindObjectsOfType<PickUp>();
-        DropOffLocations = FindObjectsOfType<DropOff>();
-    }
-    private void Start()
-    {
-        foreach (DropOff d in DropOffLocations)
-        {
-            gameObject.SetActive(false);
-        }
-    }
     public void OnTriggerEnter(Collider other)
     {
 
@@ -31,11 +16,8 @@ public class DropOff : MonoBehaviour
             scoreManager.UpdateScore(scoreManager.points);
             CarController carController = other.GetComponent<CarController>();
             {
-                timer.ToggleTimer();
                 carController.hasPassenger = false;
-                int rand = Random.Range(0, pickUp.Length);
-                arrow.transform.position = pickUp[rand].gameObject.transform.position + arrow.positionOffset;
-                pickUp[rand].gameObject.SetActive(true);
+                point.ChoosePickUp();
                 gameObject.SetActive(false);
                 
             }

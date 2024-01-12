@@ -7,13 +7,6 @@ public class ArrowPointer : MonoBehaviour
     public GameObject targetObject;  // The object you want the arrow to point at
 
     private Vector3 taxiPosition;    // Store the taxi's position
-
-    private void Start()
-    {
-        // Initialize the taxiPosition at the start
-       
-    }
-
     private void Update()
     {
         taxiPosition = taxi.transform.position;
