@@ -51,6 +51,10 @@ public class CarController : MonoBehaviour
     private float steerInput;                 // Input for steering (left/right)
 
     private Rigidbody carRb;                  // Reference to the Rigidbody component of the car
+    public float fuelTank = 50.00f;
+    public bool emptyTank;
+
+    public PauseMenu paused;
 
 
     void Start()
@@ -62,12 +66,24 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        // Get inputs for movement and steering
+          if (fuelTank <= 0)
+          {
+            fuelTank = 0;
+              emptyTank = true;
+          }
+          if (fuelTank > 0)
+          {
+              emptyTank = false;
+          }
+          // Get inputs for movement and steering
+          if (!emptyTank)
+          {
         GetInputs();
+        }
+       
 
         // Animate wheels and update wheel effects
         AnimateWheels();
-        //WheelEffects();
     }
 
     void LateUpdate()
@@ -81,6 +97,7 @@ public class CarController : MonoBehaviour
     // Method to set movement input
     public void MoveInput(float input)
     {
+        
         moveInput = input;
     }
 
@@ -105,6 +122,11 @@ public class CarController : MonoBehaviour
     {
         // Calculate the current speed of the car
         float currentSpeed = carRb.velocity.magnitude;
+
+        if (currentSpeed > 2 && !paused.paused)
+        {
+            fuelTank -= 0.0002f;
+        }
 
         // Check if the current speed exceeds the desired speed cap
         if (currentSpeed > maxSpeed)
@@ -193,24 +215,5 @@ public class CarController : MonoBehaviour
             wheel.wheelModel.transform.rotation = rot;
         }
     }
-
-    // Method to update wheel effects (e.g., trail renderer and smoke particles)
-    /*void WheelEffects()
-    {
-        foreach (var wheel in wheels)
-        {
-            // Check if the space key is pressed and the wheel is grounded with sufficient velocity
-            if (Input.GetKey(KeyCode.Space) && wheel.axel == Axel.Rear && wheel.wheelCollider.isGrounded == true && carRb.velocity.magnitude >= 10.0f)
-            {
-                // Enable the trail renderer and emit smoke particles
-                wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = true;
-                wheel.smokeParticle.Emit(1);
-            }
-            else
-            {
-                // Disable the trail renderer
-                wheel.wheelEffectObj.GetComponentInChildren<TrailRenderer>().emitting = false;
-            }
-        }
-    }*/
+ 
 }
